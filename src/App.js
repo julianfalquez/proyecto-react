@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+
+import Title from "./components/Title/Title";
+import SearchCard from "./components/SearchCard/SearchCard";
+import ProductList from "./components/ProductList/ProductList";
+import { containerStyle } from "./AppStyle.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Container maxWidth="sm">
+        <Box sx={containerStyle}>
+          <Title />
+          <SearchCard />
+          <ProductList />
+        </Box>
+      </Container>
     </div>
   );
 }

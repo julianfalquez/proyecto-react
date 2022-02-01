@@ -1,0 +1,10 @@
+.label_container{
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+    margin: 5px 20px;
+}
+div>p{
+    font-size: 13px;
+    color:"#aeabbb";
+}
