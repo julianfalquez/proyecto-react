@@ -4,7 +4,7 @@
     align-content: center;
 }
 .title_text{
-    font-size: 40px;
+    font-size: 38px;
     font-style: italic;
     font-family: roboto;
     font-weight:400;
@@ -16,3 +16,16 @@
     margin-right: 40px;
     opacity: 0.5;
 }
+
+@media only screen and (max-width: 600px) {
+    .title_container {
+      flex-direction: column;
+    }
+    .title_logo{
+        margin: 10px 0px 0px 0px;
+    }
+    .title_text{
+        text-align: center;
+        font-size: 30px;
+    }
+  }
