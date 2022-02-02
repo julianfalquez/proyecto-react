@@ -1,0 +1,28 @@
+.header_container{
+    display: flex;
+    justify-content: space-between;
+    background-color: #bfb5fa;
+}
+.header_container>div{
+    margin:10px 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo_container{
+
+}
+.logo_text{
+    font-size: 18px;
+    font-style: italic;
+    font-family: roboto;
+    font-weight:400;
+    text-align: center;
+    align-self: center;
+}
+.logo{
+    width: 60px;
+    height: 60px;
+    align-self: center;
+    opacity: 0.5;
+}

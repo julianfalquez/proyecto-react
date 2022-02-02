@@ -8,11 +8,12 @@ import Title from "./components/Title/Title";
 import SearchCard from "./components/SearchCard/SearchCard";
 import ProductList from "./components/ProductList/ProductList";
 import { containerStyle,buttonStyle,boxStyle } from "./AppStyle.js";
-
+import Header from './components/Header/Header'
 
 function App() {
   return (
-    <div>
+    <>
+      <Header></Header>
       <Container maxWidth="sm" sx={containerStyle}>
         <Box sx={boxStyle}>
           <Title />
@@ -21,7 +22,7 @@ function App() {
           <Button variant="text" sx={buttonStyle}>ADD PRODUCT</Button>
         </Box>
       </Container>
-    </div>
+    </>
   );
 }
 
