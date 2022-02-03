@@ -5,7 +5,7 @@ import Item from "./Item/Item";
 
 export default function Categories(props) {
 
-  const items = props.items.map((item, index) => (
+  const items = props.items.map((item, ) => (
     <Item key={item.id} name={item.name} value={item.price}/>
   ));
 

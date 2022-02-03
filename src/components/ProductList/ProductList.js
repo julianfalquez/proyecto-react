@@ -5,12 +5,13 @@ import Box from "@mui/material/Box";
 
 import "./ProductList.css";
 import Categories from "../Categories/Categories";
+import {getItems} from "../../services/itemsService"
 
 function ProductList() {
   const [items, setItems] = useState([]);
   const [itemsCat, setItemsCat] = useState([]);
   useEffect(() => {
-    getItems();
+    fetchItems();
   }, []);
 
   useEffect(() => {
@@ -21,21 +22,19 @@ function ProductList() {
       return group;
     }, {});
 
-    const itemsycat = Object.keys(groupByCategory).map((key,index) => {
-      return <Categories key={groupByCategory[index]} catTitle={key} items={groupByCategory[key]} />;
+    const itemsGouped = Object.keys(groupByCategory).map((key,index) => {
+      return <Categories key={index} catTitle={key} items={groupByCategory[key]} />;
     });
-    setItemsCat(itemsycat)
+    setItemsCat(itemsGouped)
   }, [items]);
 
 
 
-  async function getItems() {
-    const response = await fetch(
-      "https://my-json-server.typicode.com/luribeto/reactjs-course-data/products"
-    );
-    const data = await response.json();
-    setItems(data);
+  async function fetchItems() {
+    const response = await getItems();
+    setItems(response)
   }
+
   return (
     <Container maxWidth="sm">
       <Box>
