@@ -6,11 +6,6 @@
 .header_container>div{
     margin:10px 15vw;
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.logo_container{
-
 }
 .logo_text{
     font-size: 18px;
