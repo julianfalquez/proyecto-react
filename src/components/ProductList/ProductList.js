@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
 import "./ProductList.css";
-import Categories from '../Categories/Categories'
-
-const itemdummies=[{name:"Footbal",value:49.99},{name:"Baseball",value:9.99}]
+import Categories from "../Categories/Categories";
+import {getItems} from "../../services/itemsService"
 
 function ProductList() {
+  const [items, setItems] = useState([]);
+  const [itemsCat, setItemsCat] = useState([]);
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  useEffect(() => {
+    const groupByCategory = items.reduce((group, product) => {
+      const { category } = product;
+      group[category] = group[category] ?? [];
+      group[category].push(product);
+      return group;
+    }, {});
+
+    const itemsGouped = Object.keys(groupByCategory).map((key,index) => {
+      return <Categories key={index} catTitle={key} items={groupByCategory[key]} />;
+    });
+    setItemsCat(itemsGouped)
+  }, [items]);
+
+
+
+  async function fetchItems() {
+    const response = await getItems();
+    setItems(response)
+  }
+
   return (
     <Container maxWidth="sm">
       <Box>
@@ -17,7 +43,7 @@ function ProductList() {
             <p>Name</p>
             <p>Price</p>
           </div>
-          <div><Categories catTitle="Sporting Goods" items={itemdummies}/></div>
+          <div>{itemsCat}</div>
         </div>
       </Box>
     </Container>
