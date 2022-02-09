@@ -1,17 +1,19 @@
 import React, { useContext } from "react";
 import Button from "@mui/material/Button";
-import {CartContext} from '../../context/cartContext'
 import { buttonStyle } from "../../AppStyle";
+import { useDispatch } from "react-redux";
 
 export default function AddCart() {
-  const cartContext = useContext(CartContext);
-
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch({ type: "increment" });
+  };
   return (
     <Button
       variant="text"
       sx={buttonStyle}
       onClick={() => {
-        cartContext.addCart();
+        handleClick();
       }}
     >
       ADD PRODUCT
