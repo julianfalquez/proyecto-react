@@ -1,10 +1,13 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import CartButton from "../Cart/CartButton";
 import "./Header.css";
 import react_logo from "../../UI/react_logo.png";
+import Cart from "../Cart/Cart";
 
 export default function Header() {
+  const showCart = useSelector((state) => state.cart.showCart);
   return (
     <header className="header_container">
       <div>
@@ -12,7 +15,8 @@ export default function Header() {
         <h1 className="logo_text">SPT</h1>
       </div>
       <div>
-        <CartButton />
+        <CartButton/>
+        {showCart && <Cart />}
       </div>
     </header>
   );

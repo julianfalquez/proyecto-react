@@ -16,7 +16,7 @@ function App() {
   return (
     <>
     <Provider store={store}>
-      <Header></Header>
+      <Header></Header> 
       <Container maxWidth="sm" sx={containerStyle}>
         <Box sx={boxStyle}>
           <Title />
