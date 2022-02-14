@@ -7,4 +7,4 @@ const get = async (url) => {
     }
   };
 
-  export { get};
+  export {get};

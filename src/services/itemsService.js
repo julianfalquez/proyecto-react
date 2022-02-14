@@ -1,6 +1,6 @@
 import { get } from "./http";
 
-async function getItems() {
+const getItems=async()=> {
     return get("https://my-json-server.typicode.com/luribeto/reactjs-course-data/products")
   }
 

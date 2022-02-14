@@ -1,0 +1,9 @@
+.cart_container{
+    position: absolute;
+    background-color: #E9E5FB;
+    border-radius: 20px;
+    top:75px;
+    right:20px;
+    padding: 0px 15px;
+    width: 20vw;
+}

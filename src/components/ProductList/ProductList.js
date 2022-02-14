@@ -2,39 +2,35 @@ import React, { useEffect, useState } from "react";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-
+import FormControl from "@mui/material/FormControl";
+import { sendItems } from "../../store/reducers/itemSlicer";
 import "./ProductList.css";
 import Categories from "../Categories/Categories";
-import {getItems} from "../../services/itemsService"
+import { useDispatch, useSelector } from "react-redux";
 
 function ProductList() {
-  const [items, setItems] = useState([]);
   const [itemsCat, setItemsCat] = useState([]);
+  const itemsStore = useSelector((state) => state.items.items);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchItems();
-  }, []);
+    dispatch(sendItems());
+  }, [dispatch]);
 
   useEffect(() => {
-    const groupByCategory = items.reduce((group, product) => {
+    const groupByCategory = itemsStore.reduce((group, product) => {
       const { category } = product;
       group[category] = group[category] ?? [];
       group[category].push(product);
       return group;
-    }, {});
+    }, []);
 
-    const itemsGouped = Object.keys(groupByCategory).map((key,index) => {
-      return <Categories key={index} catTitle={key} items={groupByCategory[key]} />;
+    const itemsGouped = Object.keys(groupByCategory).map((key, index) => {
+      return (
+        <Categories key={index} catTitle={key} items={groupByCategory[key]} />
+      );
     });
-    setItemsCat(itemsGouped)
-  }, [items]);
-
-
-
-  async function fetchItems() {
-    const response = await getItems();
-    setItems(response)
-  }
-
+    setItemsCat(itemsGouped);
+  }, [itemsStore]);
   return (
     <Container maxWidth="sm">
       <Box>
@@ -43,7 +39,9 @@ function ProductList() {
             <p>Name</p>
             <p>Price</p>
           </div>
-          <div>{itemsCat}</div>
+          <FormControl component="fieldset" sx={{ width: "100%" }}>
+            <div>{itemsCat}</div>
+          </FormControl>
         </div>
       </Box>
     </Container>
