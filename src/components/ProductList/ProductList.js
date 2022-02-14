@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ProductList() {
   const [itemsCat, setItemsCat] = useState([]);
-  const itemsStore = useSelector((state) => state.items.items);
+  const itemsStore = useSelector((state) => state.items.filteredItems);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(sendItems());
@@ -34,7 +34,6 @@ function ProductList() {
   return (
     <Container maxWidth="sm">
       <Box>
-        <div>
           <div className="label_container">
             <p>Name</p>
             <p>Price</p>
@@ -42,7 +41,6 @@ function ProductList() {
           <FormControl component="fieldset" sx={{ width: "100%" }}>
             <div>{itemsCat}</div>
           </FormControl>
-        </div>
       </Box>
     </Container>
   );
