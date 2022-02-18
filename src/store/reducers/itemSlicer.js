@@ -19,9 +19,7 @@ export const itemsSlice = createSlice({
       const result = state.items.filter((item) => {
         if (state.showStock) {
           return (
-            item.name
-              .toUpperCase()
-              .includes(state.searchTerm.toUpperCase()) &&
+            item.name.toUpperCase().includes(state.searchTerm.toUpperCase()) &&
             item.stocked === state.showStock
           );
         } else {
@@ -32,6 +30,15 @@ export const itemsSlice = createSlice({
       });
       state.filteredItems = result;
     },
+    addItems(state, action) {
+      const newProduct = {
+        ...action.payload.newProduct,
+        stocked: "true",
+        id: state.items.length + 1,
+      };
+      state.items.push(newProduct);
+      state.filteredItems = state.items;
+    },
     toggleStock(state) {
       state.showStock = !state.showStock;
     },
@@ -40,9 +47,16 @@ export const itemsSlice = createSlice({
     },
   },
 });
-export const sendItems = () => {
+
+export const sendItems = (setIsLoading) => {
+  setIsLoading(true);
+  function timeout(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
   return async (dispatch) => {
+    await timeout(3000);
     const items = await getItems();
+    setIsLoading(false);
     dispatch(itemsSlice.actions.fetchItems({ items }));
   };
 };

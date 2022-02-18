@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
+
 import { sendItems } from "../../store/reducers/itemSlicer";
 import "./ProductList.css";
 import Categories from "../Categories/Categories";
-import { useDispatch, useSelector } from "react-redux";
+import { LoadingComponent } from "../../UI/LoadingComponent";
 
 function ProductList() {
   const [itemsCat, setItemsCat] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const itemsStore = useSelector((state) => state.items.filteredItems);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(sendItems());
+    dispatch(sendItems(setIsLoading));
   }, [dispatch]);
-
   useEffect(() => {
     const groupByCategory = itemsStore.reduce((group, product) => {
       const { category } = product;
@@ -34,13 +36,14 @@ function ProductList() {
   return (
     <Container maxWidth="sm">
       <Box>
-          <div className="label_container">
-            <p>Name</p>
-            <p>Price</p>
-          </div>
-          <FormControl component="fieldset" sx={{ width: "100%" }}>
-            <div>{itemsCat}</div>
-          </FormControl>
+        <div className="label_container">
+          <p>Name</p>
+          <p>Price</p>
+        </div>
+        <FormControl component="fieldset" sx={{ width: "100%" }}>
+          {isLoading && <LoadingComponent />}
+          <div>{itemsCat}</div>
+        </FormControl>
       </Box>
     </Container>
   );
