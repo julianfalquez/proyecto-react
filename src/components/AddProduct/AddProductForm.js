@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import InputAdornment from "@mui/material/InputAdornment";
 
 import { Input } from "../Input/Input";
 import classes from "./addProductModal.module.css";
-import { itemsActions } from "../../store/reducers/itemSlicer";
+// import { itemsActions } from "../../store/reducers/itemSlicer";
 
 export const AddProductForm = (props) => {
-  const itemsStore = useSelector((state) => state.items.items);
   const dispatch = useDispatch();
 
   const [isFormValid, setIsFormValid] = useState(false);
@@ -38,10 +38,11 @@ export const AddProductForm = (props) => {
     const newProduct = {
       category: categoryInput,
       name: productInput,
-      price: priceInput,
+      price: "$"+priceInput,
       description: descriptionInput,
     };
-    dispatch(itemsActions.addItems({ newProduct: newProduct }));
+    // dispatch(itemsActions.addItems({ newProduct: newProduct }));
+    dispatch({ type: "NEW_ITEM", payload: newProduct });
     props.handleClose();
   };
   return (
@@ -66,6 +67,9 @@ export const AddProductForm = (props) => {
         id="price"
         label="Price"
         type="number"
+        InputProps={{
+          startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        }}
         validate={validateCategory}
         inputValid={setpriceValid}
         value={priceInput}

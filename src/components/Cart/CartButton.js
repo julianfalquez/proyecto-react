@@ -4,13 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Box from "@mui/material/Box";
-import { cartActions } from "../../store/reducers/cartSlice";
+// import { cartActions } from "../../store/reducers/cartSlice";
 
 export default function CartButton() {
   const dispatch = useDispatch();
   const itemsInCar = useSelector((state) => state.cart.items);
   const handleClick = () => {
-    dispatch(cartActions.toggleCart());
+    // dispatch(cartActions.toggleCart());
+    dispatch({type:"TOGGLE_CART"});
+
   };
   return (
     <>

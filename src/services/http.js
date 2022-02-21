@@ -1,10 +1,11 @@
 const get = async (url) => {
-    try {
-      const response = await fetch(url);
-      return response.json();
-    } catch (err) {
-      return null;
-    }
-  };
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return null;
+  }
+};
 
-  export {get};
+export { get };

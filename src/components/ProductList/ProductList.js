@@ -5,10 +5,10 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 
-import { sendItems } from "../../store/reducers/itemSlicer";
 import "./ProductList.css";
 import Categories from "../Categories/Categories";
 import { LoadingComponent } from "../../UI/LoadingComponent";
+import {fetchItems} from "../../store/reducers/itemSlice"
 
 function ProductList() {
   const [itemsCat, setItemsCat] = useState([]);
@@ -16,8 +16,10 @@ function ProductList() {
   const itemsStore = useSelector((state) => state.items.filteredItems);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(sendItems(setIsLoading));
+    dispatch(fetchItems(setIsLoading));
   }, [dispatch]);
+
+
   useEffect(() => {
     const groupByCategory = itemsStore.reduce((group, product) => {
       const { category } = product;

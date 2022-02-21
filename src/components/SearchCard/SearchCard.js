@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Container from "@mui/material/Container";
@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { itemsActions } from "../../store/reducers/itemSlicer";
+// import { itemsActions } from "../../store/reducers/itemSlicer";
 
 import "./SearchCard.css";
 
@@ -15,13 +15,18 @@ function SearchCard() {
   const dispatch = useDispatch();
   const searchTearm = useSelector((state) => state.items.searchTearm);
   const handleChange = (event) => {
-    dispatch(itemsActions.setSearchTerm({ value: event.target.value}));
-    dispatch(itemsActions.filterItems({ search: searchTearm }));
+    // dispatch(itemsActions.setSearchTerm({ value: event.target.value}));
+    // dispatch(itemsActions.filterItems({ search: searchTearm }));
+
+    dispatch({ type: "SET_SEARCH_TEARM", payload: event.target.value });
+    dispatch({ type: "FILTER_ITEMS"});
   };
 
   const handleStockCheck = () => {
-    dispatch(itemsActions.toggleStock());
-    dispatch(itemsActions.filterItems({ search: searchTearm}));
+    // dispatch(itemsActions.toggleStock());
+    // dispatch(itemsActions.filterItems({ search: searchTearm }));
+    dispatch({ type: "TOGGLE_STOCK"});
+    dispatch({ type: "FILTER_ITEMS"});
   };
 
   return (

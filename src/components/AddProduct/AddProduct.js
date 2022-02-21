@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import { buttonStyle } from "../../AppStyle";
 import AddProductModal from "./AddProductModal";
 
-export default function AddCart() {
+export default function Addproduct() {
   const [toggleModal, setToggleModal] = useState(false);
   const addProductToggler = () => {
     setToggleModal(!toggleModal);
