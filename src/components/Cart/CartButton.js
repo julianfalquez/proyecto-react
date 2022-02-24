@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 export default function CartButton() {
   const dispatch = useDispatch();
   const itemsInCar = useSelector((state) => state.cart.items);
+  const fetchItemsStatus = useSelector((state) => state.items.status);
   const handleClick = () => {
     // dispatch(cartActions.toggleCart());
     dispatch({type:"TOGGLE_CART"});
@@ -27,7 +28,7 @@ export default function CartButton() {
             }}
           >
             <ShoppingCartIcon sx={{ fontSize: "25px" }} />
-            <span>{itemsInCar.length}</span>
+            {fetchItemsStatus==="SUCCEDED"&&<span>{itemsInCar.length}</span>}
           </IconButton>
         </Box>
       </div>

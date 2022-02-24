@@ -3,14 +3,32 @@ import { getItems } from "../../services/itemsService";
 const initialState = {
   items: [],
   filteredItems: [],
-  showStock: false,
   searchTerm: "",
+  status: "IDLE",
+  showStock: false,
+  error: null,
 };
 
 export const itemReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FETCH_ITEMS":
-      return { ...state, filteredItems: action.payload, items: action.payload };
+    case "FETCH_ITEMS_STARTED":
+      return {
+        ...state,
+        status: "LOADING",
+      };
+    case "FETCH_ITEMS_SUCCEDED":
+      return {
+        ...state,
+        filteredItems: action.payload,
+        items: action.payload,
+        status: "SUCCEDED",
+      };
+    case "FETCH_ITEMS_FAILED":
+      return {
+        ...state,
+        status: "FAILED",
+        error:action.payload
+      };
     case "FILTER_ITEMS":
       const result = state.items.filter((item) => {
         if (state.showStock) {
@@ -34,8 +52,6 @@ export const itemReducer = (state = initialState, action) => {
         stocked: true,
         id: state.items.length + 1,
       };
-      console.log(state.items[0])
-      console.log(newProduct)
       const newItemList = [...state.items, newProduct];
       return {
         ...state,
@@ -48,7 +64,6 @@ export const itemReducer = (state = initialState, action) => {
         showStock: !state.showStock,
       };
     case "SET_SEARCH_TEARM":
-      console.log(action.payload)
       return {
         ...state,
         searchTerm: action.payload,
@@ -60,12 +75,16 @@ export const itemReducer = (state = initialState, action) => {
 function timeout(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-export function fetchItems(setIsLoading) {
-  return async function fetchItemsThunk(dispatch, getState) {
-    setIsLoading(true);
+
+export function fetchItems() {
+  return async (dispatch) => {
+    dispatch({ type: "FETCH_ITEMS_STARTED" });
     await timeout(3000);
-    const response = await getItems();
-    dispatch({ type: "FETCH_ITEMS", payload: response });
-    setIsLoading(false);
+    try {
+      const response = await getItems();
+      dispatch({ type: "FETCH_ITEMS_SUCCEDED", payload: response });
+    } catch (err) {
+      dispatch({ type: "FETCH_ITEMS_FAILED", payload: err });
+    }
   };
 }

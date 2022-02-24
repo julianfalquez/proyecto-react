@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -13,7 +13,6 @@ import "./SearchCard.css";
 
 function SearchCard() {
   const dispatch = useDispatch();
-  const searchTearm = useSelector((state) => state.items.searchTearm);
   const handleChange = (event) => {
     // dispatch(itemsActions.setSearchTerm({ value: event.target.value}));
     // dispatch(itemsActions.filterItems({ search: searchTearm }));

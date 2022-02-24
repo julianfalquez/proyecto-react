@@ -1,6 +1,6 @@
 import React from 'react'
 
-import loadingGif from './loading-buffering.gif'
+import loadingGif from './spinner_loading.gif'
 
 export const LoadingComponent = () => {
   return (

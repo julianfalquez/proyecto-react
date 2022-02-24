@@ -1,10 +1,14 @@
 const get = async (url) => {
   try {
     const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    }else{
+      throw response.status
+    }
   } catch (err) {
-    return null;
+    throw err
   }
 };
 
