@@ -29,7 +29,12 @@ function ProductList() {
 
       const itemsGouped = Object.keys(groupByCategory).map((key, index) => {
         return (
-          <Categories key={index} catTitle={key} items={groupByCategory[key]} />
+          <li key={index}>
+            <Categories
+              catTitle={key}
+              items={groupByCategory[key]}
+            />
+          </li>
         );
       });
       setItemsCat(itemsGouped);
@@ -38,6 +43,41 @@ function ProductList() {
 
   const handleReload = () => {
     dispatch(fetchItems());
+  };
+
+  const ProductListSucces = () => {
+    return (
+      <>
+        <Alert
+          open={true}
+          status={"success"}
+          message={"Items fetched correctly."}
+        />
+        <ul style={{ width: "100%", listStyle: "none", padding: "0" }}>
+          {itemsCat}
+        </ul>
+      </>
+    );
+  };
+
+  const ProductListFails = () => {
+    return (
+      <>
+        <Alert
+          open={true}
+          status={"error"}
+          message={`Failed to fetch items. ${fetchItemsError}`}
+        />
+        <SvgIcon
+          fontSize="large"
+          onClick={handleReload}
+          sx={{ cursor: "pointer" }}
+          placeholder="refreshIcon"
+        >
+          <RefreshIcon name={'refreshIcon'}/>
+        </SvgIcon>
+      </>
+    );
   };
 
   return (
@@ -52,32 +92,8 @@ function ProductList() {
           sx={{ width: "100%", display: "flex", alignItems: "center" }}
         >
           {fetchItemsStatus === "LOADING" && <LoadingComponent />}
-          {fetchItemsStatus === "SUCCEDED" && (
-            <Alert
-              open={true}
-              status={"success"}
-              message={"Items fetched correctly."}
-            />
-          )}
-          {fetchItemsStatus === "SUCCEDED" && (
-            <div style={{ width: "100%" }}>{itemsCat}</div>
-          )}
-          {fetchItemsStatus === "FAILED" && (
-            <Alert
-              open={true}
-              status={"error"}
-              message={`Failed to fetch items. ${fetchItemsError}`}
-            />
-          )}
-          {fetchItemsStatus === "FAILED" && (
-            <SvgIcon
-              fontSize="large"
-              onClick={handleReload}
-              sx={{ cursor: "pointer" }}
-            >
-              <RefreshIcon />
-            </SvgIcon>
-          )}
+          {fetchItemsStatus === "SUCCEDED" && <ProductListSucces />}
+          {fetchItemsStatus === "FAILED" && <ProductListFails />}
         </FormControl>
       </Box>
     </Container>

@@ -79,7 +79,7 @@ function timeout(ms) {
 export function fetchItems() {
   return async (dispatch) => {
     dispatch({ type: "FETCH_ITEMS_STARTED" });
-    await timeout(3000);
+    await timeout(2000);
     try {
       const response = await getItems();
       dispatch({ type: "FETCH_ITEMS_SUCCEDED", payload: response });

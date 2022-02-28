@@ -23,6 +23,7 @@ export default function Item(props) {
         <div className="item_name">
           {!props.isCart && (
             <Checkbox
+              data-testid="item-checkbox"
               name={itemInfo.name}
               onChange={handleChange}
               disabled={!itemInfo.stocked}
