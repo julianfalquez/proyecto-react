@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import { buttonStyle } from "../../AppStyle";
 import AddProductModal from "./AddProductModal";
 
 export default function Addproduct() {
@@ -14,7 +13,7 @@ export default function Addproduct() {
     <>
 
     {toggleModal && <AddProductModal addProductToggler={addProductToggler}/>}
-    <Button variant="text" sx={buttonStyle} onClick={addProductToggler}>
+    <Button variant="text" sx={{color:'#424146',padding:'10px 20px'}} onClick={addProductToggler}>
       ADD PRODUCT
     </Button>
     </>

@@ -16,7 +16,7 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
     if (touched) {
       setError(!validate(value));
     }
-  }, [value]);
+  }, [value,inputValid,touched,validate]);
 
   const handleChange = (event) => {
     setValue(event.target.value);
