@@ -33,7 +33,7 @@ export default function Item(props) {
         </div>
         <p>{itemInfo.price}</p>
       </div>
-      <hr style={{ borderTop: "1px solid #e1e0e4" }}></hr>
+      <hr style={{ borderTop: "1px solid #e1e0e4",color: '#e1e0e4',height: "1px"}}></hr>
     </>
   );
 }

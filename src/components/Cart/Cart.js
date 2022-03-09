@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 
-import Item from "../Categories/Item/Item";
+import Item from "../Item/Item";
 
 import './Cart.css'
 export default function Cart() {

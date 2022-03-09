@@ -13,6 +13,7 @@ import { LoadingComponent } from "../../UI/LoadingComponent";
 import { fetchItems } from "../../store/reducers/itemSlice";
 import { groupByCategoryService } from "../../services/itemsService";
 
+
 function ProductList() {
   const [itemsCat, setItemsCat] = useState([]);
   const itemsStore = useSelector((state) => state.items.filteredItems);
