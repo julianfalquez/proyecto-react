@@ -10,7 +10,7 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Routes>
-        <Route path="home/*" element={<App />}></Route>
+        <Route path="/*" element={<App />}></Route>
         <Route
           path="*"
           element={

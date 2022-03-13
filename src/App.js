@@ -14,7 +14,15 @@ function App() {
         <Header></Header>
         <Routes>
           <Route path="products" element={<ProductsContainer />}></Route>
-          <Route path="products/:id" element={<ItemPage />}></Route>
+          <Route path="item/:id" element={<ItemPage />}></Route>
+          <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
         </Routes>
       </Provider>
     </>
