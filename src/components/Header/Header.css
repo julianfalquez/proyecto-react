@@ -3,9 +3,10 @@
     justify-content: space-between;
     background-color: #bfb5fa;
 }
-.header_container>div{
+.header_container>*{
     margin:10px 15vw;
     display: flex;
+    flex-direction: row;
 }
 .logo_text{
     font-size: 18px;

@@ -20,8 +20,10 @@ function ProductList() {
   const fetchItemsStatus = useSelector((state) => state.items.status);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchItems());
-  }, [dispatch]);
+    if (itemsStore.length === 0) {
+      dispatch(fetchItems());
+    } 
+  }, [dispatch,itemsStore.length]);
 
   const handleReload = useCallback(
     ()=>dispatch(fetchItems()),

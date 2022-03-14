@@ -39,7 +39,7 @@ export const ProductsContainer = () => {
           return <></>;
       }
     });
-  }, [fetchItemsStatus,fetchItemsError]);
+  }, [fetchItemsStatus, fetchItemsError]);
 
   return (
     <Container maxWidth="sm" sx={containerStyle}>

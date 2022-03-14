@@ -8,7 +8,6 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
 
   useEffect(() => {
     error ? setHelperText("Empty field") : setHelperText("");
-    setTouched(true);
   }, [error]);
 
   useEffect(() => {
@@ -24,6 +23,7 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
 
   const HandleBlur = () => {
     setError(!validate(value));
+    setTouched(true)
   };
 
   return (
