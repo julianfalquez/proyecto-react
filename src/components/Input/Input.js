@@ -37,7 +37,6 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
         onBlur={HandleBlur}
         helperText={helperText}
         size="small"
-        inputProps={{ "data-testid": props.testid }}
         {...props}
       />
     </>

@@ -1,9 +1,10 @@
 import ReactDOM from "react-dom";
-import { fireEvent,render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { AddProductForm } from "./AddProductForm";
 import { Provider } from "react-redux";
 
 import store from "./../../store/index";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 describe("<AddProductForm />", () => {
   beforeAll(() => {
@@ -22,10 +23,12 @@ describe("<AddProductForm />", () => {
       </Provider>
     );
     const submitButton = screen.getByRole("button", { name: "Add" });
-    const categoryInput = screen.getByTestId("category-input");
-    const productInput = screen.getByTestId("product-input");
-    const priceInput = screen.getByTestId("price-input");
-    const descriptionInput = screen.getByTestId("description-input");
+    const categoryInput = screen.getByRole("textbox", { name: "Category" });
+    const productInput = screen.getByRole("textbox", { name: "Product Name" });
+    const priceInput = screen.getByRole("spinbutton", { name: "Price" });
+    const descriptionInput = screen.getByRole("textbox", {
+      name: "Description",
+    });
 
     expect(categoryInput.value).toBe("");
     expect(productInput.value).toBe("");
@@ -40,13 +43,15 @@ describe("<AddProductForm />", () => {
       </Provider>
     );
     const submitButton = screen.getByRole("button", { name: "Add" });
-    const categoryInput = screen.getByTestId("category-input");
+    const categoryInput = screen.getByRole("textbox", { name: "Category" });
     fireEvent.change(categoryInput, { target: { value: "test" } });
-    const productInput = screen.getByTestId("product-input");
+    const productInput = screen.getByRole("textbox", { name: "Product Name" });
     fireEvent.change(productInput, { target: { value: "test" } });
-    const priceInput = screen.getByTestId("price-input");
+    const priceInput = screen.getByRole("spinbutton", { name: "Price" });
     fireEvent.change(priceInput, { target: { value: "10" } });
-    const descriptionInput = screen.getByTestId("description-input");
+    const descriptionInput = screen.getByRole("textbox", {
+      name: "Description",
+    });
     fireEvent.change(descriptionInput, { target: { value: "10" } });
 
     expect(categoryInput.value).not.toBe("");
@@ -55,5 +60,29 @@ describe("<AddProductForm />", () => {
     expect(descriptionInput.value).not.toBe("");
     expect(submitButton).not.toHaveAttribute("disabled");
   });
-});
 
+  test("Item is added", () => {
+    render(
+      <Provider store={store}>
+        <AddProductForm handleClose={() => console.log("handle close")} />
+      </Provider>
+    );
+    const submitButton = screen.getByRole("button", { name: "Add" });
+    const categoryInput = screen.getByRole("textbox", { name: "Category" });
+    fireEvent.change(categoryInput, { target: { value: "test" } });
+    const productInput = screen.getByRole("textbox", { name: "Product Name" });
+    fireEvent.change(productInput, { target: { value: "test" } });
+    const priceInput = screen.getByRole("spinbutton", { name: "Price" });
+    fireEvent.change(priceInput, { target: { value: "10" } });
+    const descriptionInput = screen.getByRole("textbox", {
+      name: "Description",
+    });
+    fireEvent.change(descriptionInput, { target: { value: "10" } });
+    fireEvent.click(submitButton);
+    const reduxState=store.getState()
+    console.log("Este es el get state",reduxState.items);
+    const itemAdded=reduxState.items.items[0]
+    console.log("Este es el get state",itemAdded.name);
+    expect(itemAdded.name===productInput.value)
+  });
+});

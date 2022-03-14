@@ -38,7 +38,7 @@ export const AddProductForm = (props) => {
     const newProduct = {
       category: categoryInput,
       name: productInput,
-      price: "$"+priceInput,
+      price: "$" + priceInput,
       description: descriptionInput,
     };
     // dispatch(itemsActions.addItems({ newProduct: newProduct }));
@@ -54,8 +54,7 @@ export const AddProductForm = (props) => {
         inputValid={setcategoryValid}
         value={categoryInput}
         setValue={setCategoryInput}
-        testid= "category-input" 
-        />
+      />
       <Input
         id="product-name"
         label="Product Name"
@@ -63,7 +62,6 @@ export const AddProductForm = (props) => {
         inputValid={setproductValid}
         value={productInput}
         setValue={setProductInput}
-        testid= "product-input" 
       />
       <Input
         id="price"
@@ -76,7 +74,6 @@ export const AddProductForm = (props) => {
         inputValid={setpriceValid}
         value={priceInput}
         setValue={setPriceInput}
-        testid= "price-input" 
       />
       <Input
         id="description"
@@ -88,7 +85,6 @@ export const AddProductForm = (props) => {
         inputValid={setdescriptionValid}
         value={descriptionInput}
         setValue={setDescriptionInput}
-        testid= "description-input" 
       />
       <div className={classes.buttons}>
         <Button type="sumbit" disabled={!isFormValid} name="submit">
