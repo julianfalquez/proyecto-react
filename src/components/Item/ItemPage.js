@@ -13,21 +13,20 @@ import { buttonTheme } from "../../UI/buttonTheme";
 export const ItemPage = () => {
   const [item, setItem] = useState();
   const [addItem, setAddItem] = useState(true);
+  const [outOfStock, setOutOfStock] = useState(true);
+  const [itemInfo, setItemInfo] = useState();
+  const [itemImage, setItemImage] = useState();
   const dispatch = useDispatch();
   const itemsStore = useSelector((state) => state.items.items);
   const itemsInCart = useSelector((state) => state.cart.items);
+  const fetchItemsStatus = useSelector((state) => state.items.status);
   const { id } = useParams();
 
   useEffect(() => {
     if (itemsStore.length === 0) {
       dispatch(fetchItems());
-    } else {
-      const foundItem = itemsStore.find((element) => {
-        return element.id === +id;
-      });
-      setItem(foundItem);
     }
-  }, [id, itemsStore, dispatch]);
+  }, [id, itemsStore]);
 
   useEffect(() => {
     if (
@@ -41,6 +40,51 @@ export const ItemPage = () => {
     }
   }, [id, itemsInCart]);
 
+  useEffect(() => {
+    setItemInfo(() => {
+      switch (fetchItemsStatus) {
+        case "SUCCEDED":
+          const foundItem = itemsStore.find((element) => {
+            return element.id === +id;
+          });
+          setItem(foundItem);
+          if (foundItem.stocked) {
+            setOutOfStock(false);
+          }
+          setItemImage(<img src={phimg} alt="Logo" className={styles.img} />);
+          return (
+            <>
+              <h2 className={styles.product_title}>{foundItem.name}</h2>
+              <h3 className={styles.product_text}>{foundItem.price}</h3>
+            </>
+          );
+        case "FAILED":
+          return (
+            <>
+              <p>fallo</p>
+            </>
+          );
+
+        case "LOADING":
+          setItemImage(
+            <div alt="Logo" className={`${styles.img} ${styles.skeleton}`} />
+          );
+          return (
+            <>
+              <div
+                className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_title}`}
+              ></div>
+              <div
+                className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_text}`}
+              ></div>
+            </>
+          );
+        default:
+          return <></>;
+      }
+    });
+  }, [fetchItemsStatus]);
+
   const addToCart = (itemInfo) => {
     dispatch({ type: "ADD_ITEM", payload: itemInfo });
   };
@@ -51,21 +95,19 @@ export const ItemPage = () => {
   return (
     <Container>
       <div className={styles.item_container}>
-        <div className={styles.logo_container}>
-          <img src={phimg} alt="Logo" />
-        </div>
+        <div className={styles.logo_container}>{itemImage}</div>
         <div className={styles.product_container}>
           <div className={styles.product_info_container}>
-            <h2>{item ? item.name : "laoding"}</h2>
-            <h3>{item ? item.price : "laoding"}</h3>
+            {itemInfo}
             <ThemeProvider theme={buttonTheme}>
               {addItem ? (
                 <Button
                   variant="contained"
                   className={styles.button}
                   onClick={() => addToCart(item)}
+                  disabled={outOfStock}
                 >
-                  Add to cart
+                  {outOfStock ? "Out of Stock" : "Add to cart"}
                 </Button>
               ) : (
                 <Button

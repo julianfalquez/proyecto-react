@@ -1,11 +1,13 @@
 import React from "react";
 
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/index";
 import Header from "./components/Header/Header";
 import { ProductsContainer } from "./components/ProductsContainer/ProductsContainer";
 import {ItemPage} from "./components/Item/ItemPage";
+import {ItemPageLoading} from "./components/Item/ItemPageLoading";
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
         <Routes>
           <Route path="products" element={<ProductsContainer />}></Route>
           <Route path="item/:id" element={<ItemPage />}></Route>
+          <Route path="item/loading" element={<ItemPageLoading />}></Route>
           <Route
           path="*"
           element={

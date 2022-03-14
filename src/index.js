@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 
 import "./index.css";
 import App from "./App";
@@ -10,6 +10,7 @@ ReactDOM.render(
   <BrowserRouter>
     <React.StrictMode>
       <Routes>
+        <Route path="/" element={<Navigate to="/products" />}></Route>
         <Route path="/*" element={<App />}></Route>
         <Route
           path="*"

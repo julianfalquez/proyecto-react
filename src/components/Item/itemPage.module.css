@@ -17,12 +17,20 @@
   background-color: "#BFB5FA";
 }
 
-h2 {
+.product_title {
   font-size: 42px;
+  width: 200px;
+  margin: 40px 0px;
 }
 
-img {
-  max-width: 700px;
+.product_text {
+  width: 100px;
+  margin: 20px 0px;
+}
+
+.img {
+  width: 700px;
+  height: 450px;
 }
 
 .logo_container {
@@ -31,18 +39,28 @@ img {
   align-content: center;
 }
 
-.square{
-  height: 50px;
-  width: 50px;
-  background-color: #555;
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton_text {
+  height: 42px;
+  border-radius: 0.125rem;
 }
 
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(197, 6%, 79%);
+  }
+  100% {
+    background-color: hsl(210, 14%, 89%);
+  }
+}
 
 @media only screen and (max-width: 992px) {
   .item_container {
     flex-direction: column;
   }
-  img {
+  .img {
     max-width: 500px;
   }
 }
