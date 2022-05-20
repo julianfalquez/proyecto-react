@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import CartButton from "../Cart/CartButton";
 import "./Header.css";
@@ -10,12 +11,12 @@ export default function Header() {
   const showCart = useSelector((state) => state.cart.showCart);
   return (
     <header className="header_container">
-      <div>
+      <Link to="/products">
         <img className="logo" src={react_logo} alt="react_logo" />
         <h1 className="logo_text">SPT</h1>
-      </div>
+      </Link>
       <div>
-        <CartButton/>
+        <CartButton />
         {showCart && <Cart />}
       </div>
     </header>

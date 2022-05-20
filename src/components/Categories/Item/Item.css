@@ -1,9 +1,0 @@
-.item_container{
-    display: flex;
-    justify-content: space-between;
-    margin: 5px 20px;
-}
-.item_name{
-    display: flex;
-    flex-direction: row;
-}
