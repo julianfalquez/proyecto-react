@@ -7,7 +7,7 @@ export const Input = ({ validate, inputValid,value,setValue, ...props }) => {
   const [helperText, setHelperText] = useState("");
 
   useEffect(() => {
-    error ? setHelperText("Empty field") : setHelperText("");
+    error ? setHelperText("Empty field.") : setHelperText("");
   }, [error]);
 
   useEffect(() => {
