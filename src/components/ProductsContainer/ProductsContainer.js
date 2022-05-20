@@ -13,11 +13,16 @@ import Alert from "../Alert/Alert";
 export const ProductsContainer = () => {
   const fetchItemsStatus = useSelector((state) => state.items.status);
   const [alert, setAlert] = useState();
+  const [status, seStatus] = useState("IDLE");
   const fetchItemsError = useSelector((state) => state.items.error);
 
   useEffect(() => {
+    seStatus(fetchItemsStatus);
+  }, [fetchItemsStatus]);
+
+  useEffect(() => {
     setAlert(() => {
-      switch (fetchItemsStatus) {
+      switch (status) {
         case "SUCCEDED":
           return (
             <Alert
@@ -39,7 +44,7 @@ export const ProductsContainer = () => {
           return <></>;
       }
     });
-  }, [fetchItemsStatus, fetchItemsError]);
+  }, [status, fetchItemsError]);
 
   return (
     <Container maxWidth="sm" sx={containerStyle}>

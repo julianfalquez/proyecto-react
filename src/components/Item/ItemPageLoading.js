@@ -12,11 +12,12 @@ export const ItemPageLoading = () => {
         </div>
         <div className={styles.product_container}>
           <div className={styles.product_info_container}>
-            <div className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_title}`}></div>
-            <div className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_text}`}></div>
-            <Button variant="contained" className={styles.button}>
-              Add to cart
-            </Button>
+            <div
+              className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_title}`}
+            ></div>
+            <div
+              className={`${styles.skeleton} ${styles.skeleton_text}  ${styles.product_text}`}
+            ></div>
           </div>
         </div>
       </div>
